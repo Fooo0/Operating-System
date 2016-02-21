@@ -1,0 +1,12 @@
+1.根据 《注释》 发生中断执行系统调用时，eax寄存器存放系统调用号，
+	而ebx，ecx，edx寄存器依次存放携带的参数，因此系统调用最多传递3个参数
+	解决方法：
+		参数存放在连续的地址空间中，传递空间首地址指针以及参数的个数
+2.
+	（1）在内核(linux-0.11/kernel)中编写系统调用处理函数sys_foo
+	（2）在usr/include/unistd.h 中添加系统调用功能号 #define __NR_foo x
+	（3）在linux-0.11/include/linux/sys.h中添加系统调用处理函数的声明，
+		并将 sys_foo添加至sys_call_table[]，使其在其中的索引值与x（即系统调用功能号）相同
+	（4）修改linux-0.11/kernel/system_call.s中系统调用总数
+	（5）修改linux-0.11/kernel/Makefile，添加新系统调用的编译、链接规则
+	（6）在调用该系统调用的应用程序中 提供接口

@@ -1,0 +1,5 @@
+﻿1.原始代码中对F1 – F12功能键按下后都会显示当前进程信息。
+  这个是通过keyboard.S中的call show_stat，调用show_stat函数来完成的，
+  其中show_stat在sched.c中，它调用了show_task()函数。
+2.因为只修改了con_write函数，实现实验要求的功能，并没有向文件输出的字符也过滤了。
+  如果想要过滤向文件输出的字符，需要修改file_write函数
